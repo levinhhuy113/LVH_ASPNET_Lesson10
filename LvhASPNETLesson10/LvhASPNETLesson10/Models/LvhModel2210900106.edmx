@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LvhK22CNT1Lesson09Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LvhKetQua">
+          <Key>
+            <PropertyRef Name="LvhMaSV" />
+            <PropertyRef Name="LvhMaMH" />
+          </Key>
+          <Property Name="LvhMaSV" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LvhMaMH" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LvhDiem" Type="decimal" Precision="3" Scale="2" />
+        </EntityType>
+        <EntityType Name="LvhKhoa">
+          <Key>
+            <PropertyRef Name="LvhMaKH" />
+          </Key>
+          <Property Name="LvhMaKH" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LvhTenKH" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LvhMonHoc">
+          <Key>
+            <PropertyRef Name="LvhMaMH" />
+          </Key>
+          <Property Name="LvhMaMH" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LvhTenMH" Type="nvarchar" MaxLength="50" />
+          <Property Name="LvhSotiet" Type="int" />
+        </EntityType>
+        <EntityType Name="LvhSinhVien">
+          <Key>
+            <PropertyRef Name="LvhMaSV" />
+          </Key>
+          <Property Name="LvhMaSV" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LvhHoSV" Type="nvarchar" MaxLength="50" />
+          <Property Name="LvhTenSV" Type="nvarchar" MaxLength="50" />
+          <Property Name="LvhPhai" Type="bit" />
+          <Property Name="LvhNgaySinh" Type="date" />
+          <Property Name="LvhNoiSinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="LvhMaKH" Type="nchar" MaxLength="10" />
+          <Property Name="LvhHocBong" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LvhDiemTrungBinh" Type="decimal" Precision="3" Scale="2" />
+        </EntityType>
+        <Association Name="FK_LvhKetQua_LvhMonHoc">
+          <End Role="LvhMonHoc" Type="Self.LvhMonHoc" Multiplicity="1" />
+          <End Role="LvhKetQua" Type="Self.LvhKetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhMonHoc">
+              <PropertyRef Name="LvhMaMH" />
+            </Principal>
+            <Dependent Role="LvhKetQua">
+              <PropertyRef Name="LvhMaMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvhKetQua_LvhSinhVien">
+          <End Role="LvhSinhVien" Type="Self.LvhSinhVien" Multiplicity="1" />
+          <End Role="LvhKetQua" Type="Self.LvhKetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhSinhVien">
+              <PropertyRef Name="LvhMaSV" />
+            </Principal>
+            <Dependent Role="LvhKetQua">
+              <PropertyRef Name="LvhMaSV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvhSinhVien_LvhKhoa">
+          <End Role="LvhKhoa" Type="Self.LvhKhoa" Multiplicity="0..1" />
+          <End Role="LvhSinhVien" Type="Self.LvhSinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhKhoa">
+              <PropertyRef Name="LvhMaKH" />
+            </Principal>
+            <Dependent Role="LvhSinhVien">
+              <PropertyRef Name="LvhMaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LvhK22CNT1Lesson09ModelStoreContainer">
+          <EntitySet Name="LvhKetQua" EntityType="Self.LvhKetQua" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LvhKhoa" EntityType="Self.LvhKhoa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LvhMonHoc" EntityType="Self.LvhMonHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LvhSinhVien" EntityType="Self.LvhSinhVien" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LvhKetQua_LvhMonHoc" Association="Self.FK_LvhKetQua_LvhMonHoc">
+            <End Role="LvhMonHoc" EntitySet="LvhMonHoc" />
+            <End Role="LvhKetQua" EntitySet="LvhKetQua" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvhKetQua_LvhSinhVien" Association="Self.FK_LvhKetQua_LvhSinhVien">
+            <End Role="LvhSinhVien" EntitySet="LvhSinhVien" />
+            <End Role="LvhKetQua" EntitySet="LvhKetQua" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvhSinhVien_LvhKhoa" Association="Self.FK_LvhSinhVien_LvhKhoa">
+            <End Role="LvhKhoa" EntitySet="LvhKhoa" />
+            <End Role="LvhSinhVien" EntitySet="LvhSinhVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LvhK22CNT1Lesson09Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="LvhKetQua">
+          <Key>
+            <PropertyRef Name="LvhMaSV" />
+            <PropertyRef Name="LvhMaMH" />
+          </Key>
+          <Property Name="LvhMaSV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LvhMaMH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LvhDiem" Type="Decimal" Precision="3" Scale="2" />
+          <NavigationProperty Name="LvhMonHoc" Relationship="Self.FK_LvhKetQua_LvhMonHoc" FromRole="LvhKetQua" ToRole="LvhMonHoc" />
+          <NavigationProperty Name="LvhSinhVien" Relationship="Self.FK_LvhKetQua_LvhSinhVien" FromRole="LvhKetQua" ToRole="LvhSinhVien" />
+        </EntityType>
+        <EntityType Name="LvhKhoa">
+          <Key>
+            <PropertyRef Name="LvhMaKH" />
+          </Key>
+          <Property Name="LvhMaKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LvhTenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LvhSinhViens" Relationship="Self.FK_LvhSinhVien_LvhKhoa" FromRole="LvhKhoa" ToRole="LvhSinhVien" />
+        </EntityType>
+        <EntityType Name="LvhMonHoc">
+          <Key>
+            <PropertyRef Name="LvhMaMH" />
+          </Key>
+          <Property Name="LvhMaMH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LvhTenMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LvhSotiet" Type="Int32" />
+          <NavigationProperty Name="LvhKetQuas" Relationship="Self.FK_LvhKetQua_LvhMonHoc" FromRole="LvhMonHoc" ToRole="LvhKetQua" />
+        </EntityType>
+        <EntityType Name="LvhSinhVien">
+          <Key>
+            <PropertyRef Name="LvhMaSV" />
+          </Key>
+          <Property Name="LvhMaSV" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LvhHoSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LvhTenSV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LvhPhai" Type="Boolean" />
+          <Property Name="LvhNgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="LvhNoiSinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LvhMaKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LvhHocBong" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LvhDiemTrungBinh" Type="Decimal" Precision="3" Scale="2" />
+          <NavigationProperty Name="LvhKetQuas" Relationship="Self.FK_LvhKetQua_LvhSinhVien" FromRole="LvhSinhVien" ToRole="LvhKetQua" />
+          <NavigationProperty Name="LvhKhoa" Relationship="Self.FK_LvhSinhVien_LvhKhoa" FromRole="LvhSinhVien" ToRole="LvhKhoa" />
+        </EntityType>
+        <Association Name="FK_LvhKetQua_LvhMonHoc">
+          <End Role="LvhMonHoc" Type="Self.LvhMonHoc" Multiplicity="1" />
+          <End Role="LvhKetQua" Type="Self.LvhKetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhMonHoc">
+              <PropertyRef Name="LvhMaMH" />
+            </Principal>
+            <Dependent Role="LvhKetQua">
+              <PropertyRef Name="LvhMaMH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvhKetQua_LvhSinhVien">
+          <End Role="LvhSinhVien" Type="Self.LvhSinhVien" Multiplicity="1" />
+          <End Role="LvhKetQua" Type="Self.LvhKetQua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhSinhVien">
+              <PropertyRef Name="LvhMaSV" />
+            </Principal>
+            <Dependent Role="LvhKetQua">
+              <PropertyRef Name="LvhMaSV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LvhSinhVien_LvhKhoa">
+          <End Role="LvhKhoa" Type="Self.LvhKhoa" Multiplicity="0..1" />
+          <End Role="LvhSinhVien" Type="Self.LvhSinhVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LvhKhoa">
+              <PropertyRef Name="LvhMaKH" />
+            </Principal>
+            <Dependent Role="LvhSinhVien">
+              <PropertyRef Name="LvhMaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LvhK22CNT1Lesson09Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="LvhKetQuas" EntityType="Self.LvhKetQua" />
+          <EntitySet Name="LvhKhoas" EntityType="Self.LvhKhoa" />
+          <EntitySet Name="LvhMonHocs" EntityType="Self.LvhMonHoc" />
+          <EntitySet Name="LvhSinhViens" EntityType="Self.LvhSinhVien" />
+          <AssociationSet Name="FK_LvhKetQua_LvhMonHoc" Association="Self.FK_LvhKetQua_LvhMonHoc">
+            <End Role="LvhMonHoc" EntitySet="LvhMonHocs" />
+            <End Role="LvhKetQua" EntitySet="LvhKetQuas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvhKetQua_LvhSinhVien" Association="Self.FK_LvhKetQua_LvhSinhVien">
+            <End Role="LvhSinhVien" EntitySet="LvhSinhViens" />
+            <End Role="LvhKetQua" EntitySet="LvhKetQuas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LvhSinhVien_LvhKhoa" Association="Self.FK_LvhSinhVien_LvhKhoa">
+            <End Role="LvhKhoa" EntitySet="LvhKhoas" />
+            <End Role="LvhSinhVien" EntitySet="LvhSinhViens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LvhK22CNT1Lesson09ModelStoreContainer" CdmEntityContainer="LvhK22CNT1Lesson09Entities">
+          <EntitySetMapping Name="LvhKetQuas">
+            <EntityTypeMapping TypeName="LvhK22CNT1Lesson09Model.LvhKetQua">
+              <MappingFragment StoreEntitySet="LvhKetQua">
+                <ScalarProperty Name="LvhMaSV" ColumnName="LvhMaSV" />
+                <ScalarProperty Name="LvhMaMH" ColumnName="LvhMaMH" />
+                <ScalarProperty Name="LvhDiem" ColumnName="LvhDiem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LvhKhoas">
+            <EntityTypeMapping TypeName="LvhK22CNT1Lesson09Model.LvhKhoa">
+              <MappingFragment StoreEntitySet="LvhKhoa">
+                <ScalarProperty Name="LvhMaKH" ColumnName="LvhMaKH" />
+                <ScalarProperty Name="LvhTenKH" ColumnName="LvhTenKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LvhMonHocs">
+            <EntityTypeMapping TypeName="LvhK22CNT1Lesson09Model.LvhMonHoc">
+              <MappingFragment StoreEntitySet="LvhMonHoc">
+                <ScalarProperty Name="LvhMaMH" ColumnName="LvhMaMH" />
+                <ScalarProperty Name="LvhTenMH" ColumnName="LvhTenMH" />
+                <ScalarProperty Name="LvhSotiet" ColumnName="LvhSotiet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LvhSinhViens">
+            <EntityTypeMapping TypeName="LvhK22CNT1Lesson09Model.LvhSinhVien">
+              <MappingFragment StoreEntitySet="LvhSinhVien">
+                <ScalarProperty Name="LvhMaSV" ColumnName="LvhMaSV" />
+                <ScalarProperty Name="LvhHoSV" ColumnName="LvhHoSV" />
+                <ScalarProperty Name="LvhTenSV" ColumnName="LvhTenSV" />
+                <ScalarProperty Name="LvhPhai" ColumnName="LvhPhai" />
+                <ScalarProperty Name="LvhNgaySinh" ColumnName="LvhNgaySinh" />
+                <ScalarProperty Name="LvhNoiSinh" ColumnName="LvhNoiSinh" />
+                <ScalarProperty Name="LvhMaKH" ColumnName="LvhMaKH" />
+                <ScalarProperty Name="LvhHocBong" ColumnName="LvhHocBong" />
+                <ScalarProperty Name="LvhDiemTrungBinh" ColumnName="LvhDiemTrungBinh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

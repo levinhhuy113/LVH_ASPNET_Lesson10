@@ -1,0 +1,48 @@
+﻿@model LvhASPNETLesson10.Models.LvhKetQua
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LvhKetQua</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LvhDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvhDiem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvhMonHoc.LvhTenMH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvhMonHoc.LvhTenMH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LvhSinhVien.LvhHoSV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LvhSinhVien.LvhHoSV)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

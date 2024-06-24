@@ -1,0 +1,39 @@
+﻿@model IEnumerable<LvhASPNETLesson10.Models.LvhMonHoc>
+
+@{
+    ViewBag.Title = "LvhIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("LVH: Create New", "LvhCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LvhTenMH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvhSotiet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvhTenMH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LvhSotiet)
+        </td>
+        <td>
+            @Html.ActionLink("LVH:Edit", "LvhEdit", new { id=item.LvhMaMH.Trim() }) |
+            @Html.ActionLink("LVH:Details", "LvhDetails", new { id=item.LvhMaMH.Trim() }) |
+            @Html.ActionLink("LVH:Delete", "LvhDelete", new { id=item.LvhMaMH.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

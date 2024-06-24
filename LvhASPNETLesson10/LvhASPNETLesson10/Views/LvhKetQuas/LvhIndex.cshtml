@@ -1,0 +1,48 @@
+﻿@model IEnumerable<LvhASPNETLesson10.Models.LvhKetQua>
+
+@{
+    ViewBag.Title = "LvhIndex";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("LVH:Create New", "LvhCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LvhDiem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvhMonHoc.LvhTenMH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LvhSinhVien.LvhHoSV)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.LvhDiem)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LvhMonHoc.LvhTenMH)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LvhSinhVien.LvhHoSV)
+    </td>
+    <td>
+        @Html.ActionLink("LVH:Edit", "LvhEdit", new { id = item.LvhMaSV + "," + item.LvhMaMH }) |
+        @Html.ActionLink("LVH:Details", "LvhDetails", new { id = item.LvhMaSV + "," + item.LvhMaMH }) |
+        @Html.ActionLink("LVH:Delete", "LvhDelete", new { id = item.LvhMaSV + "," + item.LvhMaMH })
+    </td>
+
+
+
+</tr>
+}
+
+</table>
